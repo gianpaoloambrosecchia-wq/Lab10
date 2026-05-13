@@ -50,7 +50,7 @@ class Controller:
             )
 
         self._view._txt_result.controls.append(
-            ft.Text(f"Il grafo ha {self._model.getNumeroComponentiConnesse()} vicini")
+            ft.Text(f"Il grafo ha {self._model.getNumeroComponentiConnesse()} componenti connesse")
         )
 
         for n in self._model._graph.nodes:
@@ -71,7 +71,16 @@ class Controller:
             self._view.update_page()
             return
 
-        nodiRaggiungibili = self._model.getBFSNodesFromEdges(int(codiceStato))
+
+        # Usando la RICORSIONE
+        self._model.trovaRaggiungibili(int(codiceStato))
+        nodiRaggiungibili = self._model._raggiungibili
+
+
+        # usando i METODI DI NETWORKX
+        #nodiRaggiungibili = self._model.getBFSNodesFromEdges(int(codiceStato))
+
+
         self._view._txt_result.controls.clear()
         self._view._txt_result.controls.append(
             ft.Text(f"Lo Stato selezionato può raggiungere {len(nodiRaggiungibili)} Nazioni")

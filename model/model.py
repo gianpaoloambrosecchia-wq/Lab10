@@ -45,8 +45,9 @@ class Model:
     # USA QUESTO METODO PER AVERE LA LISTA DI NODI RAGGIUNGIBILI DA UN NODO SORGENTE!!!!!!!!!!!
     # Questo metodo trova gli archi e poi dagli archi del tree trovo i nodi e gli appendo in una lista
     def getBFSNodesFromEdges(self, codiceStato):
-        # nx.bfs_edges ritorna tuple di valori (cioè i nodi) e bisogna passargli il grafo e il nodo sorgente
+
         nodoSource = self._idMap[codiceStato]
+        # nx.bfs_edges ritorna tuple di valori (cioè i nodi) e bisogna passargli il grafo e il nodo sorgente
         archi = nx.bfs_edges(self._graph, nodoSource)
         nodiBFS=[]
         # Appendi solo l'arco v perche la u (nodo partenza) lo appendi nell'iterazione precedente
@@ -55,20 +56,18 @@ class Model:
         return nodiBFS
 
 
-    def ricorsione(self, parzialeRagg):
+    def ricorsione(self, nodo):
+        self._raggiungibili.append(nodo)
 
-        if len(parzialeRagg) == 0:
-            return
-        else:
-            for n in parzialeRagg:
-                self._raggiungibili.append(n)
-                self.ricorsione(self._graph.neighbors(n))
-                self._raggiungibili.pop()
+        for vicino in self._graph.neighbors(nodo):
+            if vicino not in self._raggiungibili:  # evita i cicli
+                self.ricorsione(vicino)
 
 
     def trovaRaggiungibili(self, codiceStato):
+        self._raggiungibili = []
         nodoSource = self._idMap[codiceStato]
-        parzialeRagg = list(self._graph.neighbors(nodoSource))
-        self.ricorsione(parzialeRagg)
+        self.ricorsione(nodoSource)
+
 
 
