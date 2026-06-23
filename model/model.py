@@ -46,6 +46,13 @@ class Model:
     # Questo metodo trova gli archi e poi dagli archi del tree trovo i nodi e gli appendo in una lista.
     def getBFSNodesFromEdges(self, codiceStato):
 
+        #METODO PIU SEMPLICE
+        # Crea l'albero BFS a partire dal nodo sorgente
+        #albero_bfs = nx.bfs_tree(self._graph, nodoSource)
+
+        # Restituisce i nodi dell'albero convertiti in lista (nodoSource incluso)
+        #return list(albero_bfs.nodes)
+
         nodoSource = self._idMap[codiceStato]
         # nx.bfs_edges ritorna tuple di valori (cioè i nodi) e bisogna passargli il grafo e il nodo sorgente
         archi = nx.bfs_edges(self._graph, nodoSource)
