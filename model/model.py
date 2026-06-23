@@ -43,7 +43,7 @@ class Model:
 
 
     # USA QUESTO METODO PER AVERE LA LISTA DI NODI RAGGIUNGIBILI DA UN NODO SORGENTE!!!!!!!!!!!
-    # Questo metodo trova gli archi e poi dagli archi del tree trovo i nodi e gli appendo in una lista
+    # Questo metodo trova gli archi e poi dagli archi del tree trovo i nodi e gli appendo in una lista.
     def getBFSNodesFromEdges(self, codiceStato):
 
         nodoSource = self._idMap[codiceStato]
