@@ -53,6 +53,17 @@ class Model:
         # Restituisce i nodi dell'albero convertiti in lista (nodoSource incluso)
         #return list(albero_bfs.nodes)
 
+
+        #OPPURE ALTRO METODO SEMPLICE (USANDO LA COMPONENTE CONNESSA)
+        # Tutti i nodi raggiungibili da 'start' (grafo non orientato)
+        #raggiungibili = nx.node_connected_component(self._graph, nodoSource)
+
+        # Grafo orientato — solo seguendo gli archi in avanti
+        #raggiungibili = nx.descendants(self._graph, nodoSource)
+        #raggiungibili.add(nodoSource)  # descendants non include il nodo stesso
+        #return list(raggiungibili)
+
+
         nodoSource = self._idMap[codiceStato]
         # nx.bfs_edges ritorna tuple di valori (cioè i nodi) e bisogna passargli il grafo e il nodo sorgente
         archi = nx.bfs_edges(self._graph, nodoSource)
